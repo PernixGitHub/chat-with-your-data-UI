@@ -4,9 +4,6 @@
 name: Build and deploy app to Azure Web App - chatwithyourdata
 
 on:
-  push:
-    branches:
-    - poc
   workflow_dispatch:
 
 jobs:
@@ -59,12 +56,13 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'chatwithyourdata'
-          package: .
+          package: '.'
 
       # Azure Logout
       - name: logout
         run: |
           az logout
+
 
 
 
