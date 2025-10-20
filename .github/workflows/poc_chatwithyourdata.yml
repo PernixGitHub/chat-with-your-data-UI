@@ -31,7 +31,7 @@ jobs:
       
       - name: Zip deployment package
         run: |
-          powershell Compress-Archive -Path * -DestinationPath deploy.zip
+          powershell Compress-Archive -Path * -DestinationPath ../deploy.zip
 
       
       - name: Upload artifact for deployment job
@@ -73,6 +73,7 @@ jobs:
       - name: logout
         run: |
           az logout
+
 
 
 
