@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "C:\home\site\wwwroot"
 
 # Install dependencies
 echo "Installing Dependencies..."
