@@ -4,6 +4,9 @@
 name: Build and deploy Node.js app to Azure Web App - pnxchatwithyourdata
 
 on:
+  push:
+    branches:
+    - poc
   workflow_dispatch:
 
 jobs:
@@ -58,4 +61,5 @@ jobs:
           package: '.'
 
           
+
 
