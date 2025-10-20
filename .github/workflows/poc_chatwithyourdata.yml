@@ -27,12 +27,18 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      
+      - name: Zip deployment package
+        run: |
+          powershell Compress-Archive -Path * -DestinationPath deploy.zip
+
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: deploy.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,17 +60,20 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_252318F60D524BA7B1CA799DF20D7B6B }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7274818FFA9B45E7B9693815B8B44D75 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_573331FEF5D04EF998C200F896E2BEC7 }}
-
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'chatwithyourdata'
-          package: '.'
+      
+      - name: Deploy using Azure CLI with extraction
+        run: |
+          az webapp deploy --resource-group rg-spends-analytics-poc-2025 \
+                           --name chatwithyourdata \
+                           --src-path deploy.zip \
+                           --type zip \
+                           --clean true
 
       # Azure Logout
       - name: logout
         run: |
           az logout
+
 
 
 
