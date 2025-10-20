@@ -58,8 +58,9 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'chatwithyourdata'
-          slot-name: 'production'
+          slot-name: 'Production'
           package: .
 
           
+
 
